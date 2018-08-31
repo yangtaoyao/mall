@@ -2,7 +2,7 @@ import Vue from "vue"
 import App from "./App.vue"
 import router from "routes"
 import store from "store"
-// import "./permission"
+import "./permission"
 
 import ElementUI from "element-ui"
 import "element-ui/lib/theme-chalk/index.css"
