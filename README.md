@@ -1,13 +1,11 @@
 # shopstore
 
-### 商品界面
+> A Vue.js + node.js project
+## 商城前台vue+node.js 服务器
 
-todo:img
+## Build Setup
 
-### 购物车
-
-todo:img
-
+``` bash
 ##运行服务器
 node app.js
 ###express服务器目录
