@@ -22,8 +22,8 @@ router.get(['/', '/index', '/index.html'], function(req, res){
 app.use('/api', function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
     // axios withCredentials 设置为 true 时，需要开启以下两行代码，处理跨域请求时使用凭证
-    //res.header('Access-Control-Allow-Origin', req.headers.origin);
-    //res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });

@@ -1,49 +1,32 @@
 const express = require('express')
-const md5 = require('md5')
-const db = require('../models/db2')
+// const md5 = require('md5')
+const db = require('../../models/db2')
 
 // 路由对象
 const router = express.Router()
-router.prefix = '/login'
+router.prefix = '/erp/login'
 
 // 暴露路由模块
 module.exports = router
 
 /**
- * post /login/do
+ *   /login/do
  */
 router.post('/do', (req, res) => {
-    console.log(req.body)
-        // SELECT 
-        //     t1.id, t1.name, t2.name roles
-        // FROM 
-        //     user t1
-        // LEFT JOIN 
-        //     role t2
-        // ON 
-        //     t1.role_id=t2.id
-        // WHERE 
-        //     t1.username=?
-        // AND 
-        //     t1.password=?
-        // AND 
-        //     t1.deleted='0'
-        // AND 
-        //     t2.deleted='0'
-        
+    console.log("erp/login/do");
+    console.log(req.body.params);
     db.query(`
         SELECT 
-        t1.id,t1.name,t1.role_id
+        *
         FROM 
         USER t1
         WHERE 
-        t1.username='qwe'
+        t1.username=?
         AND 
-        t1.password='123'
-        `,
-        // [req.body.username, md5(md5(req.body.password))], function(rows){
-           [] ,function(rows){
-            console.log("rows:"+JSON.stringify(rows))
+        t1.password=?
+        `, [req.body.params.username, req.body.params.password], function(rows){
+        //   [] ,function(rows){
+        console.log("rows:"+JSON.stringify(rows))
         if (rows.length > 0){
             // 判断 session 记录
             const isLogin = req.session.isLogin
@@ -51,14 +34,13 @@ router.post('/do', (req, res) => {
             if (!isLogin){
                 req.session.isLogin = 1
                 req.session.userid  = rows[0].id
-                req.session.name = rows[0].name
+                req.session.username = rows[0].username
             }
-            
+            console.log("cookie========"+JSON.stringify(req.cookies));
+            console.log("session========"+JSON.stringify(req.session))
             // 下发 cookie
-            res.cookie('Admin-Token', rows[0].id)
-            res.cookie('username', rows[0].name)
-            //console.log(req.session.userid)
-
+           // res.cookie('Admin-Token', rows[0].id)
+            res.cookie('username', rows[0].username);
             // 处理系统登录记录日志表
             
             // 返回数据
@@ -67,8 +49,7 @@ router.post('/do', (req, res) => {
                 message: '登录成功.',
                 info: {
                     id: rows[0].id,
-                    name: rows[0].name,
-                    roles: [rows[0].roles]
+                    name: rows[0].username
                 }
             })
         } else {
@@ -78,20 +59,15 @@ router.post('/do', (req, res) => {
             })
         }
     })
-
-    // connection.query('SELECT 1', function (error, results, fields) {
-    //     if (error) throw error;
-    //     // connected!
-    //   });
-
 })
 
 /**
  * GET /login/out
  */
 router.get('/out', (req, res) => {
-    console.log("/login/out")
     // 销毁 session
+    console.log("jout cookie========"+JSON.stringify(req.cookies));
+    console.log("out session========"+JSON.stringify(req.session))
     req.session.destroy(err => {
         if (err){
             return res.json({
@@ -99,6 +75,7 @@ router.get('/out', (req, res) => {
                 message: '退出登录失败.'
             })
         }
+        
         // 删除 cookie
         res.clearCookie('Admin-Token')
         res.clearCookie('username')
@@ -107,4 +84,5 @@ router.get('/out', (req, res) => {
             message: '退出登录成功.'
         })
     })
+    
 })

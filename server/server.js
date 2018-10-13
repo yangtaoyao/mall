@@ -72,4 +72,5 @@ app.use(function(err, req, res, next){
 // 404
 app.use(function(req, res){
     return res.status(404).sendFile(path.join(__dirname, 'views/err.html'));
+    console.error('server 2080:404');
 });

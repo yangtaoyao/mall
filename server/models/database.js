@@ -8,8 +8,8 @@ module.exports = {
     connection: {
         'host'     : '127.0.0.1',
         'user'     : 'root',
-        'password' : 'root',
-        'database' : 'app_cms',
+        'password' : '',
+        'database' : 'shoppingmall',
 		'multipleStatements': true
     }
 };

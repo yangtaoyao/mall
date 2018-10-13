@@ -60,7 +60,7 @@ export default {
           username: this.form.username,
           password: this.form.password
         })
-        // console.log(response.data)
+        console.log(response.data)
         if (response.data.err == 1) {
           this.createLoginInfo({
             id: response.data.info.id,
@@ -80,8 +80,8 @@ export default {
 </script>
 
 <style>
-.login-wrapper {
-}
+/* .login-wrapper {
+} */
 .login-wrapper .welcome {
   text-align: center;
   padding: 40px 0 30px;

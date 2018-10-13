@@ -2,13 +2,9 @@
   "name": "shopstore",
   "description": "A Vue.js project,both ends",
   "version": "1.0.0",
-  "author": "刘子凌",
+  "author": "",
   "private": false,
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jiaozhiye/app-manage-cli/issues"
-  },
-  "homepage": "https://github.com/jiaozhiye/app-manage-cli",
   "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.conf.js --open --hot",

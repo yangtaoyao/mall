@@ -14,6 +14,25 @@ module.exports = router
 /**
  * GET /user/getlist
  */
+router.get('/out', (req, res) => {
+    console.log("/login/out")
+    // 销毁 session
+    req.session.destroy(err => {
+        if (err){
+            return res.json({
+                err: 0,
+                message: '退出登录失败.'
+            })
+        }
+        // 删除 cookie
+        res.clearCookie('Admin-Token')
+        res.clearCookie('username')
+        return res.json({
+            err: 1,
+            message: '退出登录成功.'
+        })
+    })
+})
 router.get('/getlist', (req, res) => {
     // console.log(req.query)
     let sqlStr = ``

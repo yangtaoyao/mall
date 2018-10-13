@@ -1,9 +1,3 @@
-/**
- * @Author: jzy
- * @Date: 2016/10/17
- * @Last Modified by: jzy
- * @Last Modified time: 2016/10/17
- */
 const mysql = require('mysql');
 const pool  = require('./pool');
 const mysqlTran = require('mysql-tran');
